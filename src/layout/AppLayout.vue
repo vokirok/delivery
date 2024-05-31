@@ -6,6 +6,6 @@
     <h1>App Layout</h1>
   </header>
 
-  <RouterView/>
+  <router-view></router-view>
 
 </template>

@@ -29,5 +29,5 @@ function signIn() {
   <p v-if="user">Hello {{ user.displayName }}</p>
   <p v-else>No user</p>
   <Button @click="signIn">Boo</Button>
-  <RouterView />
+  <router-view></router-view>
 </template>
