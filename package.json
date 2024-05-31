@@ -1,12 +1,14 @@
 {
-  "name": "Delivery",
+  "name": "delivery",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite  --host --port 2004",
     "build": "vite build",
-    "preview": "vite preview  --host --port 2004"
+    "preview": "vite preview  --host --port 2004",
+    "deploy": "firebase deploy --only hosting",
+    "firebase emulator": "firebase emulators:start"
   },
   "prettier": {
     "printWidth": 100,
