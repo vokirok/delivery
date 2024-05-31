@@ -23,6 +23,10 @@ const router = createRouter({
       component: EmptyLayout,
       children: [
         {
+          path: '',
+          component: () => import('./pages/user/Account.vue'),
+        },
+        {
           path: 'signin',
           component: () => import('./pages/user/SignIn.vue'),
         },

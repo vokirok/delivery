@@ -1,11 +1,9 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
-  <header>
+  <!-- <header>
     <h1>Empty Layout</h1>
-  </header>
+  </header> -->
 
   <router-view></router-view>
-
 </template>
