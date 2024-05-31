@@ -17,11 +17,13 @@
     "plugins": []
   },
   "dependencies": {
+    "firebase": "^10.12.2",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primevue": "^3.52.0",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vuefire": "^3.1.23"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
