@@ -3,9 +3,9 @@ import { ref, reactive } from 'vue';
 const testMode = ref(false);
 
 const testUsers = reactive([
-  { email: 'test@test.com', password: '123qwe' },
-  { email: 'user1@test.com', password: '123qwe' },
-  { email: 'user2@test.com', password: '123qwe' },
+  { email: 'test@test.com', password: '123qwe', name: 'Дорогой покупатель' },
+  { email: 'vasily@test.com', password: '123456', name: 'Василий Муркин' },
+  { email: 'polina@test.com', password: '123456', name: 'Полина Широкова' },
 ]);
 
 const noTestUsers = reactive([]);
