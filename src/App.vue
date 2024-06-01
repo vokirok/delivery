@@ -1,33 +1,13 @@
 <script setup>
-import { ref } from 'vue';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useCurrentUser, useFirebaseAuth } from 'vuefire';
+import { useTestMode } from '@/composables/testMode';
 
-const usermail = ref('test@test.com');
-const userpass = ref('123qwe');
-
-const auth = useFirebaseAuth();
-const user = useCurrentUser();
-
-function signIn() {
-  signInWithEmailAndPassword(auth, usermail.value, userpass.value)
-    .then((userCredential) => {
-      user.value = userCredential.user;
-      console.log('User signed in');
-      console.log(userCredential);
-      console.log(userCredential.user);
-    })
-    .catch((error) => {
-      console.error('Failed to sign in');
-      console.error(error);
-    });
-}
+const { testMode } = useTestMode();
 </script>
 
 <template>
-  <!-- <p v-if="user">Hello {{ user.displayName }}</p>
-  <p v-else>No user</p>
-  <Button @click="signIn">Boo</Button> -->
   <Toast />
   <router-view></router-view>
+  <div class="absolute" style="z-index: 50000; bottom: 26px; left: 4px">
+    <label><Checkbox v-model="testMode" :binary="true" class="mr-2" />Test mode</label>
+  </div>
 </template>

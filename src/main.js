@@ -14,6 +14,7 @@ import Checkbox from 'primevue/checkbox';
 import ConfirmationService from 'primevue/confirmationservice';
 import Dialog from 'primevue/dialog';
 import DialogService from 'primevue/dialogservice';
+import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import Password from 'primevue/password';
@@ -89,7 +90,10 @@ app.directive('badge', BadgeDirective);
 app.directive('ripple', Ripple);
 app.directive('styleclass', StyleClass);
 
+app.component('Badge', Badge);
 app.component('Button', Button);
+app.component('Dialog', Dialog);
+app.component('Dropdown', Dropdown);
 app.component('Checkbox', Checkbox);
 app.component('Message', Message);
 app.component('Password', Password);

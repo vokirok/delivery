@@ -1,28 +1,27 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCurrentUser, useFirebaseAuth } from 'vuefire';
 import { useRouter, useRoute } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
 
+import { useTestMode } from '@/composables/testMode';
+
 const email = ref('test@test.com');
 const password = ref('123qwe');
-const rememberPassword = ref(false);
 
 const errorMessage = ref('');
 
-const showAdditionalBlock = ref(false);
-
 const auth = useFirebaseAuth();
-const user = useCurrentUser();
 
 const router = useRouter();
 const toast = useToast();
 
+const { testMode, testUsers } = useTestMode();
+
 function onSubmit() {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
-      user.value = userCredential.user;
       // console.log('User signed in');
       // console.log(userCredential);
       // console.log(userCredential.user);
@@ -82,7 +81,20 @@ function onSubmit() {
 
           <div>
             <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+            <Dropdown
+              v-if="testMode"
+              id="email1"
+              editable
+              type="text"
+              placeholder="Email address"
+              class="w-full md:w-30rem mb-5 p-2"
+              :options="testUsers"
+              optionLabel="email"
+              style="padding: 1rem"
+              v-model="email"
+            />
             <InputText
+              v-else
               id="email1"
               type="text"
               placeholder="Email address"
@@ -102,29 +114,9 @@ function onSubmit() {
               :inputStyle="{ padding: '1rem' }"
             ></Password>
 
-            <div
-              v-if="showAdditionalBlock"
-              class="flex align-items-center justify-content-between mb-5 gap-5"
-            >
-              <div class="flex align-items-center">
-                <Checkbox
-                  v-model="rememberPassword"
-                  id="rememberme1"
-                  binary
-                  class="mr-2"
-                ></Checkbox>
-                <label for="rememberme1">Remember me</label>
-              </div>
-              <a
-                class="font-medium no-underline ml-2 text-right cursor-pointer"
-                style="color: var(--primary-color)"
-                >Forgot password?</a
-              >
-            </div>
-
             <Message severity="error" v-if="errorMessage">{{ errorMessage }}</Message>
 
-            <Button label="Sign In" class="w-full p-3 mb-5 text-xl" type="submit"></Button>
+            <Button label="Sign In" class="w-full p-3 my-5 text-xl" type="submit"></Button>
           </div>
         </div>
       </div>
