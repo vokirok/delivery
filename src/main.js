@@ -31,16 +31,15 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
+const firebaseDb = getFirestore();
 
 // Setting up local Firebase emulator for debug purposes only for localhost
 
 if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
   // console.log(`Working in emulator: ${location.hostname}`);
 
-  // const db = getFirestore();
-  // connectFirestoreEmulator(db, '127.0.0.1', 4400);
-
   connectAuthEmulator(firebaseAuth, 'http://127.0.0.1:9099');
+  // connectFirestoreEmulator(firebaseDb, '127.0.0.1', 8080);
 }
 
 // Create Vue App
