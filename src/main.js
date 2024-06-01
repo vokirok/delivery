@@ -6,7 +6,22 @@ import { getFirestore, collection } from 'firebase/firestore';
 import { VueFire, VueFireAuth } from 'vuefire';
 
 import PrimeVue from 'primevue/config';
+
+import Badge from 'primevue/badge';
+import BadgeDirective from 'primevue/badgedirective';
 import Button from 'primevue/button';
+import Checkbox from 'primevue/checkbox';
+import ConfirmationService from 'primevue/confirmationservice';
+import Dialog from 'primevue/dialog';
+import DialogService from 'primevue/dialogservice';
+import InputText from 'primevue/inputtext';
+import Message from 'primevue/message';
+import Password from 'primevue/password';
+import Ripple from 'primevue/ripple';
+import StyleClass from 'primevue/styleclass';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+import Tooltip from 'primevue/tooltip';
 
 import 'primevue/resources/themes/aura-light-blue/theme.css';
 import 'primeflex/primeflex.css';
@@ -63,9 +78,22 @@ app.use(VueFire, {
 // Init PrimeVue for Vue App
 
 app.use(PrimeVue, { ripple: true });
+app.use(ToastService);
+app.use(DialogService);
+app.use(ConfirmationService);
 
-// Add PrimeVue components
+// Add PrimeVue directives and components
+
+app.directive('tooltip', Tooltip);
+app.directive('badge', BadgeDirective);
+app.directive('ripple', Ripple);
+app.directive('styleclass', StyleClass);
 
 app.component('Button', Button);
+app.component('Checkbox', Checkbox);
+app.component('Message', Message);
+app.component('Password', Password);
+app.component('InputText', InputText);
+app.component('Toast', Toast);
 
 app.mount('#app');

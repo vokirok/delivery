@@ -19,6 +19,17 @@ const router = createRouter({
     },
 
     {
+      path: '/product',
+      component: AppLayout,
+      children: [
+        {
+          path: ':productId(\\d+)',
+          component: () => import('./pages/Product.vue'),
+        },
+      ],
+    },
+
+    {
       path: '/user',
       component: EmptyLayout,
       children: [
@@ -33,6 +44,10 @@ const router = createRouter({
         {
           path: 'signup',
           component: () => import('./pages/user/SignUp.vue'),
+        },
+        {
+          path: 'cart',
+          component: () => import('./pages/user/Cart.vue'),
         },
       ],
     },

@@ -5,7 +5,9 @@
     class="surface-ground flex align-items-center justify-content-center min-w-screen overflow-hidden"
   >
     <div class="flex flex-column align-items-center justify-content-center">
-      <img src="/local_mall.svg" alt="Mall logo" class="mb-5 w-6rem flex-shrink-0" />
+      <router-link to="/">
+        <img src="/local_mall.svg" alt="Mall logo" class="mb-5 w-6rem flex-shrink-0" />
+      </router-link>
       <div
         style="
           border-radius: 56px;

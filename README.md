@@ -166,3 +166,7 @@ if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
   connectFirestoreEmulator(firebaseDb, '127.0.0.1', 8080);
 }
 ```
+
+## Структура
+
+TODO: Описать структуру `router`

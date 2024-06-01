@@ -25,8 +25,9 @@ function signIn() {
 </script>
 
 <template>
-  <p v-if="user">Hello {{ user.displayName }}</p>
+  <!-- <p v-if="user">Hello {{ user.displayName }}</p>
   <p v-else>No user</p>
-  <Button @click="signIn">Boo</Button>
+  <Button @click="signIn">Boo</Button> -->
+  <Toast />
   <router-view></router-view>
 </template>
