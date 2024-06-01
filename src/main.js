@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
-// import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
 import { VueFire, VueFireAuth } from 'vuefire';
 
 import PrimeVue from 'primevue/config';
