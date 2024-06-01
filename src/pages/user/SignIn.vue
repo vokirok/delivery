@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useCurrentUser, useFirebaseAuth } from 'vuefire';
-import { useRouter, useRoute } from 'vue-router';
+import { useFirebaseAuth } from 'vuefire';
+import { useRouter } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
 
 import { useTestMode } from '@/composables/testMode';
@@ -18,6 +18,26 @@ const router = useRouter();
 const toast = useToast();
 
 const { testMode, testUsers } = useTestMode();
+const menu = ref();
+const items = computed(() => {
+  return [
+    {
+      label: 'Test users',
+      items: testUsers.map((user) => ({
+        label: `${user.name}`,
+        icon: 'pi pi-user',
+        command: () => {
+          email.value = user.email;
+          password.value = user.password;
+        },
+      })),
+    },
+  ];
+});
+
+function toggle(event) {
+  menu.value.toggle(event);
+}
 
 function onSubmit() {
   signInWithEmailAndPassword(auth, email.value, password.value)
@@ -50,6 +70,8 @@ function onSubmit() {
         case 'auth/wrong-password':
           errorMessage.value = 'Wrong password';
           break;
+        default:
+          errorMessage.value = error.code;
       }
     });
 }
@@ -79,22 +101,24 @@ function onSubmit() {
             <span class="text-600 font-medium">Sign in to continue</span>
           </div>
 
+          <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
+
           <div>
-            <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-            <Dropdown
-              v-if="testMode"
-              id="email1"
-              editable
-              type="text"
-              placeholder="Email address"
-              class="w-full md:w-30rem mb-5 p-2"
-              :options="testUsers"
-              optionLabel="email"
-              style="padding: 1rem"
-              v-model="email"
-            />
+            <label for="email1" class="block text-900 text-xl font-medium mb-2"
+              >Email<Button
+                v-if="testMode"
+                class="text-xs p-1 ml-2"
+                icon="pi pi-users"
+                @click="toggle"
+                aria-haspopup="true"
+                aria-controls="overlay_menu"
+                severity="secondary"
+                label="Test users"
+                outlined
+              />
+            </label>
+
             <InputText
-              v-else
               id="email1"
               type="text"
               placeholder="Email address"
@@ -116,7 +140,12 @@ function onSubmit() {
 
             <Message severity="error" v-if="errorMessage">{{ errorMessage }}</Message>
 
-            <Button label="Sign In" class="w-full p-3 my-5 text-xl" type="submit"></Button>
+            <Button
+              label="Sign In"
+              class="w-full p-3 my-5 text-xl"
+              type="submit"
+              :disabled="!(email && password)"
+            ></Button>
           </div>
         </div>
       </div>

@@ -42,7 +42,9 @@ function handleSignOut() {
         <span class="text-900 font-medium text-2xl line-height-3 mr-8">Delivery</span>
       </router-link>
 
-      <section v-if="user" class="flex justify-content-between gap-2 py-3">
+      <section v-if="user" class="flex justify-content-between align-items-center gap-2 py-3">
+        <span class="hidden md:block">{{ user.displayName }}</span>
+
         <router-link to="/user/cart">
           <Button label="Cart" badge="2" icon="pi pi-shopping-cart"></Button>
         </router-link>
@@ -54,12 +56,12 @@ function handleSignOut() {
           @click="handleSignOut"
         ></Button>
       </section>
-      <section v-else class="flex justify-content-between gap-2 py-3">
+      <section v-else class="flex justify-content-between align-items-center gap-2 py-3">
         <router-link to="/user/signin">
           <Button label="Sign In" icon="pi pi-sign-in"></Button>
         </router-link>
 
-        <router-link to="/user/signin">
+        <router-link to="/user/signup">
           <Button label="Sign Up" icon="pi pi-user-plus"></Button>
         </router-link>
       </section>

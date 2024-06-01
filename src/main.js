@@ -16,10 +16,12 @@ import Dialog from 'primevue/dialog';
 import DialogService from 'primevue/dialogservice';
 import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
+import Menu from 'primevue/menu';
 import Message from 'primevue/message';
 import Password from 'primevue/password';
 import Ripple from 'primevue/ripple';
 import StyleClass from 'primevue/styleclass';
+import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
@@ -30,6 +32,9 @@ import 'primeicons/primeicons.css';
 
 import App from './App.vue';
 import router from './router';
+import { useTestMode } from '@/composables/testMode';
+
+const { testMode } = useTestMode();
 
 import './style.css';
 
@@ -56,6 +61,8 @@ if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
 
   connectAuthEmulator(firebaseAuth, 'http://127.0.0.1:9099');
   // connectFirestoreEmulator(firebaseDb, '127.0.0.1', 8080);
+
+  testMode.value = true;
 }
 
 // Create Vue App
@@ -95,9 +102,11 @@ app.component('Button', Button);
 app.component('Dialog', Dialog);
 app.component('Dropdown', Dropdown);
 app.component('Checkbox', Checkbox);
+app.component('InputText', InputText);
+app.component('Menu', Menu);
 app.component('Message', Message);
 app.component('Password', Password);
-app.component('InputText', InputText);
+app.component('Tag', Tag);
 app.component('Toast', Toast);
 
 app.mount('#app');
