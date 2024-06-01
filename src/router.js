@@ -53,6 +53,11 @@ const router = createRouter({
     },
 
     {
+      path: '/debug',
+      component: () => import('./pages/Debug.vue'),
+    },
+
+    {
       path: '/:catchAll(.*)*',
       component: () => import('./pages/NotFoundPage.vue'),
     },

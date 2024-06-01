@@ -1,0 +1,470 @@
+[
+    {
+        "id": 1,
+        "name": "Our Product #1",
+        "description": "Our Product #1 long description",
+        "price": 649.07,
+        "category": "Clothing",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 2,
+        "name": "Our Product #2",
+        "description": "Our Product #2 long description",
+        "price": 234.29,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 3,
+        "name": "Our Product #3",
+        "description": "Our Product #3 long description",
+        "price": 4.79,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 4,
+        "name": "Our Product #4",
+        "description": "Our Product #4 long description",
+        "price": 370.34,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 5,
+        "name": "Our Product #5",
+        "description": "Our Product #5 long description",
+        "price": 266.17,
+        "category": "Fitness",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 6,
+        "name": "Our Product #6",
+        "description": "Our Product #6 long description",
+        "price": 544.1,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 7,
+        "name": "Our Product #7",
+        "description": "Our Product #7 long description",
+        "price": 448.43,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 8,
+        "name": "Our Product #8",
+        "description": "Our Product #8 long description",
+        "price": 681.81,
+        "category": "Clothing",
+        "inventoryStatus": "INSTOCK",
+        "rating": 1
+    },
+    {
+        "id": 9,
+        "name": "Our Product #9",
+        "description": "Our Product #9 long description",
+        "price": 721.47,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 10,
+        "name": "Our Product #10",
+        "description": "Our Product #10 long description",
+        "price": 863.89,
+        "category": "Accessories",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 11,
+        "name": "Our Product #11",
+        "description": "Our Product #11 long description",
+        "price": 138.35,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 12,
+        "name": "Our Product #12",
+        "description": "Our Product #12 long description",
+        "price": 180.84,
+        "category": "Electronics",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 13,
+        "name": "Our Product #13",
+        "description": "Our Product #13 long description",
+        "price": 369.61,
+        "category": "Fitness",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 14,
+        "name": "Our Product #14",
+        "description": "Our Product #14 long description",
+        "price": 43.81,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 15,
+        "name": "Our Product #15",
+        "description": "Our Product #15 long description",
+        "price": 706.12,
+        "category": "Clothing",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 16,
+        "name": "Our Product #16",
+        "description": "Our Product #16 long description",
+        "price": 275.64,
+        "category": "Electronics",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 17,
+        "name": "Our Product #17",
+        "description": "Our Product #17 long description",
+        "price": 22.18,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 18,
+        "name": "Our Product #18",
+        "description": "Our Product #18 long description",
+        "price": 721.87,
+        "category": "Fitness",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 19,
+        "name": "Our Product #19",
+        "description": "Our Product #19 long description",
+        "price": 108.91,
+        "category": "Clothing",
+        "inventoryStatus": "INSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 20,
+        "name": "Our Product #20",
+        "description": "Our Product #20 long description",
+        "price": 126.91,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 21,
+        "name": "Our Product #21",
+        "description": "Our Product #21 long description",
+        "price": 42.15,
+        "category": "Clothing",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 22,
+        "name": "Our Product #22",
+        "description": "Our Product #22 long description",
+        "price": 623.69,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 23,
+        "name": "Our Product #23",
+        "description": "Our Product #23 long description",
+        "price": 2.6,
+        "category": "Clothing",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 24,
+        "name": "Our Product #24",
+        "description": "Our Product #24 long description",
+        "price": 597.87,
+        "category": "Clothing",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 25,
+        "name": "Our Product #25",
+        "description": "Our Product #25 long description",
+        "price": 585.6,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 26,
+        "name": "Our Product #26",
+        "description": "Our Product #26 long description",
+        "price": 455.22,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 27,
+        "name": "Our Product #27",
+        "description": "Our Product #27 long description",
+        "price": 126.8,
+        "category": "Fitness",
+        "inventoryStatus": "INSTOCK",
+        "rating": 1
+    },
+    {
+        "id": 28,
+        "name": "Our Product #28",
+        "description": "Our Product #28 long description",
+        "price": 903.32,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 29,
+        "name": "Our Product #29",
+        "description": "Our Product #29 long description",
+        "price": 483.16,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 30,
+        "name": "Our Product #30",
+        "description": "Our Product #30 long description",
+        "price": 757.44,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 1
+    },
+    {
+        "id": 31,
+        "name": "Our Product #31",
+        "description": "Our Product #31 long description",
+        "price": 92.75,
+        "category": "Clothing",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 32,
+        "name": "Our Product #32",
+        "description": "Our Product #32 long description",
+        "price": 935.34,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 33,
+        "name": "Our Product #33",
+        "description": "Our Product #33 long description",
+        "price": 84.36,
+        "category": "Fitness",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 34,
+        "name": "Our Product #34",
+        "description": "Our Product #34 long description",
+        "price": 187.31,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 35,
+        "name": "Our Product #35",
+        "description": "Our Product #35 long description",
+        "price": 786.62,
+        "category": "Electronics",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 36,
+        "name": "Our Product #36",
+        "description": "Our Product #36 long description",
+        "price": 747.47,
+        "category": "Clothing",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 1
+    },
+    {
+        "id": 37,
+        "name": "Our Product #37",
+        "description": "Our Product #37 long description",
+        "price": 89.93,
+        "category": "Electronics",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 38,
+        "name": "Our Product #38",
+        "description": "Our Product #38 long description",
+        "price": 172.51,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 39,
+        "name": "Our Product #39",
+        "description": "Our Product #39 long description",
+        "price": 831.03,
+        "category": "Fitness",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 40,
+        "name": "Our Product #40",
+        "description": "Our Product #40 long description",
+        "price": 547.21,
+        "category": "Fitness",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 1
+    },
+    {
+        "id": 41,
+        "name": "Our Product #41",
+        "description": "Our Product #41 long description",
+        "price": 963.82,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 42,
+        "name": "Our Product #42",
+        "description": "Our Product #42 long description",
+        "price": 730.27,
+        "category": "Clothing",
+        "inventoryStatus": "INSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 43,
+        "name": "Our Product #43",
+        "description": "Our Product #43 long description",
+        "price": 566.8,
+        "category": "Fitness",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 44,
+        "name": "Our Product #44",
+        "description": "Our Product #44 long description",
+        "price": 398.67,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 45,
+        "name": "Our Product #45",
+        "description": "Our Product #45 long description",
+        "price": 641.37,
+        "category": "Electronics",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 46,
+        "name": "Our Product #46",
+        "description": "Our Product #46 long description",
+        "price": 164.5,
+        "category": "Accessories",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 3
+    },
+    {
+        "id": 47,
+        "name": "Our Product #47",
+        "description": "Our Product #47 long description",
+        "price": 426.93,
+        "category": "Fitness",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 48,
+        "name": "Our Product #48",
+        "description": "Our Product #48 long description",
+        "price": 164.9,
+        "category": "Accessories",
+        "inventoryStatus": "INSTOCK",
+        "rating": 0
+    },
+    {
+        "id": 49,
+        "name": "Our Product #49",
+        "description": "Our Product #49 long description",
+        "price": 742.67,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 50,
+        "name": "Our Product #50",
+        "description": "Our Product #50 long description",
+        "price": 548.11,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 2
+    },
+    {
+        "id": 51,
+        "name": "Our Product #51",
+        "description": "Our Product #51 long description",
+        "price": 605.89,
+        "category": "Food",
+        "inventoryStatus": "LOWSTOCK",
+        "rating": 4
+    },
+    {
+        "id": 52,
+        "name": "Our Product #52",
+        "description": "Our Product #52 long description",
+        "price": 968.34,
+        "category": "Food",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4
+    }
+]
