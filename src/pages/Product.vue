@@ -32,8 +32,13 @@ const product = useDocument(doc(firestore, 'products', route.params.productId));
     <div v-if="product">
       <hr />
       <!-- <p>{{ product }}</p> -->
+      <p>{{ product.id }}</p>
       <p>{{ product.name }}</p>
+      <p>{{ product.description }}</p>
       <p>{{ product.price }}</p>
+      <p>{{ product.category }}</p>
+      <p>{{ product.inventoryStatus }}</p>
+      <p>{{ product.rating }}</p>
 
       <Image :src="`/products/${product.id}.jpg`" :alt="product.name" width="250" preview />
     </div>
