@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, connectFirestoreEmulator, collection } from 'firebase/firestore';
 import { VueFire, VueFireAuth } from 'vuefire';
 
 import PrimeVue from 'primevue/config';
@@ -26,7 +26,6 @@ import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
 
-import 'primevue/resources/themes/aura-light-blue/theme.css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 
@@ -36,6 +35,7 @@ import { useTestMode } from '@/composables/testMode';
 
 const { testMode } = useTestMode();
 
+import './theme.css';
 import './style.css';
 
 // This config was taken from Firebase Console.
@@ -60,7 +60,7 @@ if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
   // console.log(`Working in emulator: ${location.hostname}`);
 
   connectAuthEmulator(firebaseAuth, 'http://127.0.0.1:9099');
-  // connectFirestoreEmulator(firebaseDb, '127.0.0.1', 8080);
+  connectFirestoreEmulator(firebaseDb, '127.0.0.1', 8080);
 
   testMode.value = true;
 }
