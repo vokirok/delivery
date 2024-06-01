@@ -7,9 +7,9 @@ import { useToast } from 'primevue/usetoast';
 
 import { useTestMode } from '@/composables/testMode';
 
-const name = ref('Дорогой покупатель');
-const email = ref('test@test.com');
-const password = ref('123qwe');
+const name = ref('');
+const email = ref('');
+const password = ref('');
 
 const errorMessage = ref('');
 
@@ -43,26 +43,19 @@ function toggle(event) {
 
 function onSubmit() {
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
-      console.log('User successfully created');
-      console.log(userCredential);
-      console.log(userCredential.user);
+    .then((userCredential) =>
       updateProfile(userCredential.user, {
         displayName: name.value,
-      })
-        .then(() => console.log('profile updated'))
-        .catch((error) => {
-          console.error('profile not updated');
-          console.error(error);
+      }).then(() => {
+        router.push('/');
+        toast.add({
+          severity: 'success',
+          summary: 'Successfully signed up',
+          detail: `Welcome, ${name.value}!`,
+          life: 3000,
         });
-      router.push('/');
-      toast.add({
-        severity: 'success',
-        summary: 'Successfully signed up',
-        detail: `Welcome, ${name.value}!`,
-        life: 3000,
-      });
-    })
+      })
+    )
     .catch((error) => {
       console.error('Failed to create user');
       console.error(error);

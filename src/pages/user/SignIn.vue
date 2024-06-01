@@ -7,8 +7,8 @@ import { useToast } from 'primevue/usetoast';
 
 import { useTestMode } from '@/composables/testMode';
 
-const email = ref('test@test.com');
-const password = ref('123qwe');
+const email = ref('');
+const password = ref('');
 
 const errorMessage = ref('');
 
@@ -42,10 +42,6 @@ function toggle(event) {
 function onSubmit() {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
-      // console.log('User signed in');
-      // console.log(userCredential);
-      // console.log(userCredential.user);
-      // console.log(userCredential.user.displayName);
       router.push('/');
       toast.add({
         severity: 'success',
