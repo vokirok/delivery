@@ -42,7 +42,9 @@ async function makeOrder2() {
       </template>
       <Column field="id" header="№"></Column>
       <Column field="name" header="Товар"></Column>
-      <Column field="price" header="Цена"></Column>
+      <Column field="price" header="Цена">
+        <template #body="slotProps">{{ slotProps.data.price }} руб.</template>
+      </Column>
       <Column>
         <template #body="slotProps">
           <Button
