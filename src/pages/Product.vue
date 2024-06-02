@@ -11,7 +11,7 @@ const firestore = useFirestore();
 
 const product = useDocument(doc(firestore, 'products', route.params.productId));
 
-const { inCart, addToCart, removeFromCart } = useCart();
+const { user, inCart, addToCart, removeFromCart } = useCart();
 
 // const product = ref(null);
 // console.log(route.params.productId);
@@ -76,22 +76,67 @@ const getSeverity = (product) => {
         </div>
       </div>
 
-      <div class="flex flex-row md:flex-column justify-content-between align-items-start">
-        <div>
-          <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
-          <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
+      <div class="flex flex-column justify-content-between align-items-start gap-2">
+        <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
+        <div class="font-medium text-secondary text-color-secondary text-sm">
+          {{ product.category }}
         </div>
+        <div class="font-medium text-secondary">{{ product.description }}</div>
       </div>
 
       <div class="flex flex-column gap-2">
         <span class="text-xl font-semibold text-900">{{ product.price }} руб.</span>
         <div class="flex flex-row gap-2">
-          <Button
+          <div v-if="inCart(product)" class="flex flex-auto flex-row gap-2">
+            <router-link
+              to="/user/cart"
+              class="no-underline flex-auto white-space-nowrap flex flex-row"
+            >
+              <Button
+                icon="pi pi-check-square"
+                label="Checkout"
+                :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+                class="flex-auto white-space-nowrap"
+                severity="success"
+              />
+            </router-link>
+            <!-- @click="checkout" -->
+            <Button
+              icon="pi pi-times"
+              v-tooltip.left="`Remove from cart`"
+              outlined
+              severity="danger"
+              @click="() => removeFromCart(product)"
+            />
+          </div>
+          <div v-else-if="user" class="flex flex-row flex-auto gap-2">
+            <Button
+              icon="pi pi-cart-arrow-down"
+              label="Add to cart"
+              :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+              class="flex-auto white-space-nowrap"
+              @click="() => addToCart(product)"
+            ></Button>
+            <!-- <Button icon="pi pi-heart" outlined></Button> -->
+          </div>
+          <div v-else class="flex flex-row gap-2">
+            <router-link to="/signin" class="flex-auto white-space-nowrap flex no-underline">
+              <Button
+                icon="pi pi-cart-arrow-down"
+                label="Add to cart"
+                class="flex-auto white-space-nowrap"
+                :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+              ></Button>
+            </router-link>
+            <!-- <Button icon="pi pi-heart" outlined></Button> -->
+          </div>
+
+          <!-- <Button
             icon="pi pi-shopping-cart"
             label="Buy Now"
             :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
             class="flex-auto white-space-nowrap"
-          ></Button>
+          ></Button> -->
         </div>
       </div>
     </div>
