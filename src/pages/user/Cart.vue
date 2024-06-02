@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import { useCart } from '@/composables/cart';
+
+const { cart } = useCart();
+</script>
 
 <template>
   <article>

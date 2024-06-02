@@ -4,10 +4,14 @@ import { signOut } from 'firebase/auth';
 import { useCurrentUser, useFirebaseAuth } from 'vuefire';
 import { useToast } from 'primevue/usetoast';
 
+import { useCart } from '@/composables/cart';
+
 const auth = useFirebaseAuth();
 const user = useCurrentUser();
 
 const toast = useToast();
+
+const { cart } = useCart();
 
 function handleSignOut() {
   const userName = user.value.displayName;
@@ -46,14 +50,17 @@ function handleSignOut() {
         <span class="hidden md:block">{{ user.displayName }}</span>
 
         <router-link to="/user/cart">
-          <Button label="Cart" badge="2" severity="secondary "icon="pi pi-shopping-cart"></Button>
+          <Button
+            v-if="cart.length"
+            label="Cart"
+            :badge="`${cart.length}`"
+            severity="secondary "
+            icon="pi pi-shopping-cart"
+          ></Button>
+          <Button v-else label="Cart" severity="secondary " icon="pi pi-shopping-cart"></Button>
         </router-link>
 
-        <Button
-          label="Sign Out"
-          icon="pi pi-sign-out"
-          @click="handleSignOut"
-        ></Button>
+        <Button label="Sign Out" icon="pi pi-sign-out" @click="handleSignOut"></Button>
       </section>
       <section v-else class="flex justify-content-between align-items-center gap-2 py-3">
         <router-link to="/signin">
@@ -65,9 +72,9 @@ function handleSignOut() {
         </router-link>
       </section>
     </header>
-  </main>
 
-  <div class="m-2 p-2">
-    <router-view></router-view>
-  </div>
+    <div class="m-2 p-2">
+      <router-view></router-view>
+    </div>
+  </main>
 </template>
