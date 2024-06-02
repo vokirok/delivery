@@ -25,6 +25,7 @@ import Menu from 'primevue/menu';
 import Message from 'primevue/message';
 import Password from 'primevue/password';
 import Ripple from 'primevue/ripple';
+import Skeleton from 'primevue/skeleton';
 import StyleClass from 'primevue/styleclass';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
@@ -35,6 +36,7 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 
 import App from './App.vue';
+import ProductImage from './components/ProductImage.vue';
 import router from './router';
 import { useTestMode } from '@/composables/testMode';
 
@@ -116,7 +118,10 @@ app.component('InputText', InputText);
 app.component('Menu', Menu);
 app.component('Message', Message);
 app.component('Password', Password);
+app.component('Skeleton', Skeleton);
 app.component('Tag', Tag);
 app.component('Toast', Toast);
+
+app.component('ProductImage', ProductImage);
 
 app.mount('#app');

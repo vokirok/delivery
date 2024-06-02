@@ -83,21 +83,19 @@ const getSeverity = (product) => {
                 class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
                 :class="{ 'border-top-1 surface-border': index !== 0 }"
               >
-                <router-link :to="`/product/${product.id}`" class="no-underline">
-                  <div class="md:w-10rem relative">
-                    <img
-                      class="block xl:block mx-auto border-round w-full"
-                      :src="`/products/${product.id}.jpg`"
-                      :alt="product.name"
-                    />
-                    <Tag
-                      :value="product.inventoryStatus"
-                      :severity="getSeverity(product)"
-                      class="absolute"
-                      style="left: 4px; top: 4px"
-                    ></Tag>
-                  </div>
-                </router-link>
+                <div class="md:w-10rem relative">
+                  <ProductImage
+                    :product
+                    imageClass="block xl:block mx-auto border-round w-full"
+                    preview
+                  />
+                  <Tag
+                    :value="product.inventoryStatus"
+                    :severity="getSeverity(product)"
+                    class="absolute"
+                    style="left: 4px; top: 4px"
+                  ></Tag>
+                </div>
 
                 <div
                   class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4"
@@ -152,24 +150,22 @@ const getSeverity = (product) => {
               class="col-12 sm:col-6 md:col-4 p-2"
             >
               <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
-                <router-link :to="`/product/${product.id}`" class="no-underline">
-                  <div class="surface-50 flex justify-content-center border-round p-3">
-                    <div class="relative mx-auto">
-                      <img
-                        class="border-round w-full"
-                        :src="`/products/${product.id}.jpg`"
-                        :alt="product.name"
-                        style="max-width: 300px"
-                      />
-                      <Tag
-                        :value="product.inventoryStatus"
-                        :severity="getSeverity(product)"
-                        class="absolute"
-                        style="left: 4px; top: 4px"
-                      ></Tag>
-                    </div>
+                <div class="surface-50 flex justify-content-center border-round p-3">
+                  <div class="relative mx-auto">
+                    <ProductImage
+                      :product
+                      imageClass="border-round w-full"
+                      imageStyle="max-width: 300px"
+                      preview
+                    />
+                    <Tag
+                      :value="product.inventoryStatus"
+                      :severity="getSeverity(product)"
+                      class="absolute"
+                      style="left: 4px; top: 4px"
+                    ></Tag>
                   </div>
-                </router-link>
+                </div>
                 <div class="pt-4">
                   <div class="flex flex-row justify-content-between align-items-start gap-2">
                     <div>

@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useFirestore, useCollection, useDocument } from 'vuefire';
 import { collection, doc, setDoc } from 'firebase/firestore';
 
@@ -70,42 +71,37 @@ async function uploadJsonToFirebase() {
   fetch('/products.json', { headers: { 'Cache-Control': 'no-cache' } })
     .then((res) => res.json())
     .then(jsonToFirebase);
-  // for (let i = 1; i <= numTestProducts; ++i) {
-  //   await setDoc(doc(firestore, 'products', String(i)), {
-  //     id: i,
-  //     name: `Our Product #${i}`,
-  //     description: `Our Product #${i} long description`,
-  //     price: getRandomPrice(),
-  //     category: getRandomCategory(),
-  //     inventoryStatus: getRandomInStock(),
-  //     rating: getRandomRating(),
-  //   });
-  // }
 }
+
+const productToDisplay = ref({ id: 52, name: 'The product' });
 </script>
 
 <template>
-  <section class="flex flex-column gap-2 p-2 pb-8">
+  <section class="flex flex-column gap-2 p-2">
     <h1>Страница для отладочных целей</h1>
     <router-link to="/" class="pb-4">
-      <Button label="На главную" icon="pi pi-home" severity="success"></Button>
+      <Button label="На главную" icon="pi pi-home" severity="success" />
     </router-link>
 
     <Button
       :label="`Создать ${numTestProducts} случайных тестовых продукта сразу в Firebase`"
       @click="generateJsonAndUploadToFirebase"
       severity="secondary"
-    ></Button>
+    />
     <Button
       :label="`Создать ${numTestProducts} случайных тестовых продукта и скачать как 'product.json'`"
       @click="generateJsonAndDownload"
       severity="secondary"
-    ></Button>
+    />
     <Button
       label="Загрузить тестовые продукты из 'product.json' в Firebase"
       @click="uploadJsonToFirebase"
       severity="secondary"
-    ></Button>
+    />
+
+    <Divider />
+
+    <ProductImage :product="productToDisplay" width="250" preview />
 
     <ul>
       <li v-for="product in products" :key="product.id">

@@ -40,7 +40,8 @@ const product = useDocument(doc(firestore, 'products', route.params.productId));
       <p>{{ product.inventoryStatus }}</p>
       <p>{{ product.rating }}</p>
 
-      <Image :src="`/products/${product.id}.jpg`" :alt="product.name" width="250" preview />
+      <ProductImage :product width="250" preview />
+      <!-- <Image :src="`/products/${product.id}.jpg`" :alt="product.name" width="250" preview /> -->
     </div>
   </article>
 </template>
