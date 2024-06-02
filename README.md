@@ -4,7 +4,7 @@
 
 ### Скачать и установить Visual Studio Code
 
-https://code.visualstudio.com/)
+https://code.visualstudio.com/
 
 ### Скачать и установить Node.js
 
@@ -19,6 +19,10 @@ npm install -g firebase-tools
 ```
 
 Возможно потребуются права администратора.
+
+### Склонировать проект
+
+Склонировать репозиторий в нужную папку.
 
 ### Установить используемые в проекте пакеты
 
@@ -88,7 +92,7 @@ cd delivery
 
 ### PrimeVue
 
-https://primevue.org/4
+https://primevue.org/
 
 UI kit для приложений на Vue.
 Там 3 пакета:
