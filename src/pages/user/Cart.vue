@@ -67,6 +67,7 @@ async function makeOrder2() {
             icon="pi pi-check-square"
             severity="success"
             label="Оформить заказ"
+            :disabled="cart.length === 0"
             @click="makeOrder2"
           />
         </div>
