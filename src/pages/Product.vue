@@ -114,13 +114,13 @@ const getSeverity = (product) => {
               icon="pi pi-cart-arrow-down"
               label="Add to cart"
               :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
-              class="flex-auto white-space-nowrap"
+              class="flex flex-auto white-space-nowrap"
               @click="() => addToCart(product)"
             ></Button>
             <!-- <Button icon="pi pi-heart" outlined></Button> -->
           </div>
-          <div v-else class="flex flex-row gap-2">
-            <router-link to="/signin" class="flex-auto white-space-nowrap flex no-underline">
+          <div v-else class="flex flex-row flex-auto gap-2">
+            <router-link to="/signin" class="flex flex-auto white-space-nowrap no-underline">
               <Button
                 icon="pi pi-cart-arrow-down"
                 label="Add to cart"
