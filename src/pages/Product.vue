@@ -47,20 +47,20 @@ const getSeverity = (product) => {
 <template>
   <section
     v-if="product"
-    class="flex flex-column align-items-stretch p-4 gap-3 border-1 mx-auto"
+    class="flex flex-column align-items-stretch p-4 gap-3 mx-auto"
     style="width: 450px"
   >
-    <div class="relative border-1 flex flex-column align-items-center">
+    <div class="relative flex flex-column align-items-center">
       <ProductImage :product width="400" imageClass="mx-auto border-round " preview />
-      <!-- v-if="product.inventoryStatus === 'LOWSTOCK'" -->
       <Tag
+        v-if="product.inventoryStatus === 'LOWSTOCK'"
         :value="product.inventoryStatus"
         :severity="getSeverity(product)"
         class="absolute"
         style="left: 4px; top: 4px"
       ></Tag>
     </div>
-    <div class="relative flex flex-column justify-content-between flex-1 gap-4 border-1 w-auto">
+    <div class="relative flex flex-column justify-content-between flex-1 gap-4 w-auto">
       <div class="absolute surface-100 p-1" style="border-radius: 30px; right: 4px; top: 8px">
         <div
           class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
