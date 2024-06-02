@@ -45,6 +45,7 @@ const getSeverity = (product) => {
                       preview
                     />
                     <Tag
+                      v-if="product.inventoryStatus === 'LOWSTOCK'"
                       :value="product.inventoryStatus"
                       :severity="getSeverity(product)"
                       class="absolute"
