@@ -26,10 +26,80 @@ const { inCart, addToCart, removeFromCart } = useCart();
 //     console.log('No such document!');
 //   }
 // });
+
+const getSeverity = (product) => {
+  switch (product.inventoryStatus) {
+    case 'INSTOCK':
+      return 'success';
+
+    case 'LOWSTOCK':
+      return 'warning';
+
+    case 'OUTOFSTOCK':
+      return 'danger';
+
+    default:
+      return null;
+  }
+};
 </script>
 
 <template>
-  <article v-if="product">
+  <section
+    v-if="product"
+    class="flex flex-column align-items-stretch p-4 gap-3 border-1 mx-auto"
+    style="width: 450px"
+  >
+    <div class="relative border-1 flex flex-column align-items-center">
+      <ProductImage :product width="400" imageClass="mx-auto border-round " preview />
+      <!-- v-if="product.inventoryStatus === 'LOWSTOCK'" -->
+      <Tag
+        :value="product.inventoryStatus"
+        :severity="getSeverity(product)"
+        class="absolute"
+        style="left: 4px; top: 4px"
+      ></Tag>
+    </div>
+    <div
+      class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4 border-1 w-auto"
+    >
+      <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+        <div>
+          <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
+          <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
+        </div>
+        <div class="surface-100 p-1" style="border-radius: 30px">
+          <div
+            class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
+            style="
+              border-radius: 30px;
+              box-shadow:
+                0px 1px 2px 0px rgba(0, 0, 0, 0.04),
+                0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+            "
+          >
+            <span class="text-900 font-medium text-sm">{{ product.rating }}</span>
+            <i class="pi pi-star-fill text-yellow-500"></i>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-column md:align-items-end gap-5">
+        <span class="text-xl font-semibold text-900">{{ product.price }} руб.</span>
+        <div class="flex flex-row-reverse md:flex-row gap-2">
+          <Button
+            icon="pi pi-shopping-cart"
+            label="Buy Now"
+            :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+            class="flex-auto md:flex-initial white-space-nowrap"
+          ></Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <Divider /> -->
+
+  <article v-if="false">
     <!-- <h2>Product {{ $route.params.productId }}</h2> -->
     <h2>Product {{ $route.params.productId }}</h2>
     <div v-if="product">
@@ -47,7 +117,10 @@ const { inCart, addToCart, removeFromCart } = useCart();
       <!-- <Image :src="`/products/${product.id}.jpg`" :alt="product.name" width="250" preview /> -->
 
       <div v-if="inCart(product)" class="flex flex-row gap-2">
-        <router-link to="/user/cart" class="no-underline">
+        <router-link
+          to="/user/cart"
+          class="no-underline flex-auto white-space-nowrap flex flex-row gap-2"
+        >
           <Button
             icon="pi pi-check-square"
             label="Checkout"
