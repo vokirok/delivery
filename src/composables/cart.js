@@ -22,7 +22,7 @@ export function useCart() {
 
   watchEffect(() => {
     if (user.value) {
-      console.log('CART: watchEffect');
+      // console.log('CART: watchEffect');
 
       unsubscribe = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
         const data = doc.data();
@@ -34,7 +34,7 @@ export function useCart() {
   });
 
   onBeforeUnmount(() => {
-    console.log('CART: onBeforeUnmount');
+    // console.log('CART: onBeforeUnmount');
     if (unsubscribe) {
       unsubscribe();
       unsubscribe = null;
@@ -76,10 +76,11 @@ export function useCart() {
   async function makeOrder(afterComplete) {
     if (user.value) {
       const timestamp = Date.now();
+      const sum = cartSumm.value;
       const order = {
         items: Array.from(cart.value),
         timestamp,
-        sum: cartSumm.value,
+        sum,
         user: { id: user.value.uid, email: user.value.email, name: user.value.displayName },
       };
       // setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
@@ -87,7 +88,7 @@ export function useCart() {
       await setDoc(newOrderRef, order);
       clearCart();
       if (afterComplete) {
-        afterComplete(timestamp);
+        afterComplete(timestamp, sum);
       }
     }
   }

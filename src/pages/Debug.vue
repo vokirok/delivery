@@ -143,18 +143,21 @@ function cancelOrder(order) {
       <Button label="На главную" icon="pi pi-home" severity="success" />
     </router-link>
 
-    <Button
-      :label="`Создать ${numTestProducts} случайных тестовых продукта сразу в Firebase`"
-      @click="generateJsonAndUploadToFirebase"
-      severity="secondary"
-      size="small"
-    />
-    <Button
-      :label="`Создать ${numTestProducts} случайных тестовых продукта и скачать как 'product.json'`"
-      @click="generateJsonAndDownload"
-      severity="secondary"
-      size="small"
-    />
+    <template v-if="false">
+      <Button
+        :label="`Создать ${numTestProducts} случайных тестовых продукта сразу в Firebase`"
+        @click="generateJsonAndUploadToFirebase"
+        severity="secondary"
+        size="small"
+      />
+      <Button
+        :label="`Создать ${numTestProducts} случайных тестовых продукта и скачать как 'product.json'`"
+        @click="generateJsonAndDownload"
+        severity="secondary"
+        size="small"
+      />
+    </template>
+
     <Button
       label="Загрузить тестовые продукты из 'product.json' в Firebase"
       @click="uploadJsonToFirebase"
@@ -186,11 +189,20 @@ function cancelOrder(order) {
       </Column>
       <Column>
         <template #body="slotProps">
-          <router-link :to="`/user/order/${slotProps.data.timestamp}`">
-            <Button type="button" text outlined label="View" />
-          </router-link>
+          <div class="flex flex-row gap-2">
+            <router-link :to="`/user/order/${slotProps.data.timestamp}`">
+              <Button type="button" text outlined label="View" />
+            </router-link>
+            <Button
+              type="button"
+              icon="pi pi-times"
+              text
+              outlined
+              severity="danger"
+              @click="() => cancelOrder(slotProps.data)"
+            />
+          </div>
         </template>
-        <!-- @click="() => viewOrder(slotProps.data)" -->
       </Column>
     </DataTable>
 
