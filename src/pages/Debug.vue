@@ -76,11 +76,11 @@ async function uploadJsonToFirebase() {
 
 // const productToDisplay = ref({ id: 52, name: 'The product' });
 
-const cart = ref(new Set());
+const cart = ref([]);
 
-const cartItems = computed(() => {
-  return Array.from(cart.value);
-});
+function inCart(product) {
+  return cart.value.some(({ id }) => product.id === id);
+}
 
 function updateCart() {
   if (user.value) {
@@ -91,20 +91,31 @@ function updateCart() {
 }
 
 function addToCart(product) {
-  cart.value.add(product);
+  cart.value.push(product);
   updateCart();
 }
 
 function removeFromCart(product) {
-  cart.value.delete(product);
+  // cart.value.delete(product);
+  cart.value = cart.value.filter(({ id }) => product.id !== id);
   updateCart();
 }
+
+function clearCart() {
+  cart.value.length = 0;
+  updateCart();
+}
+
+const cartSumm = computed(() => {
+  return cart.value.reduce((sum, { price }) => sum + price, 0);
+});
 
 // const cartInFirebase = useCollection(collection(firestore, 'cart', user.value.uid));
 
 function checkout() {
   if (user.value) {
     console.log(user.value.uid);
+    console.log(checkout);
   }
 }
 
@@ -117,11 +128,8 @@ watchEffect(() => {
     getDoc(doc(firestore, 'cart', String(user.value.uid))).then((doc) => {
       if (doc) {
         const data = doc.data();
-        if (data) {
-          const c = data.cart;
-          if (c) {
-            cart.value = new Set(doc.data().cart);
-          }
+        if (data && data.cart) {
+          cart.value = Array.from(data.cart);
         }
         console.log('Doc exists:');
         console.log(doc);
@@ -163,32 +171,67 @@ onBeforeUnmount(() => {
       :label="`Создать ${numTestProducts} случайных тестовых продукта сразу в Firebase`"
       @click="generateJsonAndUploadToFirebase"
       severity="secondary"
+      size="small"
     />
     <Button
       :label="`Создать ${numTestProducts} случайных тестовых продукта и скачать как 'product.json'`"
       @click="generateJsonAndDownload"
       severity="secondary"
+      size="small"
     />
     <Button
       label="Загрузить тестовые продукты из 'product.json' в Firebase"
       @click="uploadJsonToFirebase"
       severity="secondary"
+      size="small"
     />
 
     <Divider />
 
     <p v-if="user">{{ user.displayName }}</p>
 
-    <DataTable :value="cartItems" showGridlines tableStyle="min-width: 30rem">
+    <DataTable :value="cart" showGridlines tableStyle="min-width: 30rem">
+      <template #header>
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+          <span class="text-xl text-900 font-bold">Cart</span>
+          <Button icon="pi pi-times" severity="danger" label="Clear cart" @click="clearCart" />
+        </div>
+      </template>
       <Column field="id" header="Id"></Column>
       <Column field="name" header="Name"></Column>
+      <Column field="price" header="Price"></Column>
+      <Column>
+        <template #body="slotProps">
+          <Button
+            type="button"
+            icon="pi pi-times"
+            text
+            rounded
+            outlined
+            severity="danger"
+            @click="() => removeFromCart(slotProps.data)"
+          />
+        </template>
+      </Column>
+      <template #footer>
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+          Products in cart: {{ cart ? cart.length : 0 }} (${{ cartSumm }})
+          <Button icon="pi pi-check-square" severity="success" label="Checkout" @click="checkout" />
+        </div>
+      </template>
     </DataTable>
 
     <Divider />
 
     <!-- <ProductImage :product="productToDisplay" width="250" preview /> -->
 
-    <DataTable :value="products" showGridlines tableStyle="min-width: 30rem">
+    <DataTable
+      :value="products"
+      showGridlines
+      tableStyle="min-width: 30rem"
+      scrollable
+      scrollHeight="300px"
+    >
       <Column field="id" header="Id"></Column>
       <Column header="Image">
         <template #body="slotProps">
@@ -208,32 +251,32 @@ onBeforeUnmount(() => {
       </Column>
       <Column field="price" header="Price">
         <template #body="slotProps">
-          <div class="flex flex-column md:align-items-end gap-5">
+          <div class="flex flex-column md:align-items-start gap-5">
             <span class="text-xl font-semibold text-900">${{ slotProps.data.price }}</span>
-            <div v-if="cart.has(slotProps.data)" class="flex flex-row-reverse md:flex-row gap-2">
-              <Button
-                icon="pi pi-times-circle"
-                v-tooltip="`Remove from cart`"
-                outlined
-                severity="danger"
-                @click="() => removeFromCart(slotProps.data)"
-              ></Button>
+            <div v-if="inCart(slotProps.data)" class="flex flex-row gap-2">
               <Button
                 icon="pi pi-check-square"
                 label="Checkout"
                 :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"
-                class="flex-auto md:flex-initial white-space-nowrap"
+                class="flex-auto white-space-nowrap"
                 severity="success"
-                @click="() => checkout()"
+                @click="checkout"
                 cla
-              ></Button>
+              />
+              <Button
+                icon="pi pi-times"
+                v-tooltip="`Remove from cart`"
+                outlined
+                severity="danger"
+                @click="() => removeFromCart(slotProps.data)"
+              />
             </div>
-            <div v-else class="flex flex-row-reverse md:flex-row gap-2">
+            <div v-else class="flex flex-row gap-2">
               <Button
                 icon="pi pi-cart-arrow-down"
                 label="Add to cart"
                 :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"
-                class="flex-auto md:flex-initial white-space-nowrap"
+                class="flex-auto white-space-nowrap"
                 @click="() => addToCart(slotProps.data)"
               ></Button>
               <!-- <Button icon="pi pi-heart" outlined></Button> -->
