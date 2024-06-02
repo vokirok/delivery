@@ -1,17 +1,7 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import { useCurrentUser, useFirestore, useCollection, useDocument } from 'vuefire';
-import {
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  deleteDoc,
-  onSnapshot,
-  where,
-  query,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { useCurrentUser, useFirestore } from 'vuefire';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useConfirm } from 'primevue/useconfirm';
 import { useToast } from 'primevue/usetoast';
 
