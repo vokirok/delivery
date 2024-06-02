@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   setDoc,
+  deleteDoc,
   onSnapshot,
   where,
   query,
@@ -121,62 +122,65 @@ const cartSumm = computed(() => {
 
 async function checkout() {
   if (user.value) {
-    console.log(user.value.uid);
-    // console.log(checkout);
-    const order = { items: Array.from(cart.value), timestamp: Date.now(), sum: cartSumm.value };
+    const timestamp = Date.now();
+    const order = {
+      items: Array.from(cart.value),
+      timestamp,
+      sum: cartSumm.value,
+      user: { id: user.value.uid, email: user.value.email, name: user.value.displayName },
+    };
     // setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
-    const newOrderRef = doc(collection(firestore, String(user.value.uid)));
+    const newOrderRef = doc(collection(firestore, String(user.value.uid)), String(timestamp));
     await setDoc(newOrderRef, order);
   }
 }
 
-let unsubscribe = null;
+const unsubscribe = [];
 
 watchEffect(() => {
   if (user.value) {
-    console.log(`watchEffect: ${user.value.uid}`);
-
     getDoc(doc(firestore, 'cart', String(user.value.uid))).then((doc) => {
       if (doc) {
         const data = doc.data();
         if (data && data.cart) {
           cart.value = Array.from(data.cart);
         }
-        console.log('Doc exists:');
-        console.log(doc);
-        console.log(data);
-        // cart.value = new Set(doc.data().cart);
-      } else {
-        console.log('Doc is not exists');
       }
     });
 
-    unsubscribe = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
+    const unsCart = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
       const data = doc.data();
       if (data && data.cart) {
         cart.value = Array.from(data.cart);
       }
     });
+    unsubscribe.push(unsCart);
 
-    // const q = query(collection(firestore, 'cart'), where('uid', '==', user.value.uid));
-
-    // unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //   const cart = [];
-    //   querySnapshot.forEach((doc) => {
-    //     // cart.push(doc.data().name);
-    //     console.log(cart);
-    //   });
-    //   // console.log('Current cities in CA: ', cart.join(', '));
-    // });
+    const unsOrders = onSnapshot(collection(firestore, String(user.value.uid)), (col) => {
+      orders.value.length = 0;
+      col.forEach((doc) => {
+        const data = doc.data();
+        if (data && data.timestamp) {
+          orders.value.push(data);
+        }
+      });
+    });
+    unsubscribe.push(unsOrders);
   }
 });
 
 onBeforeUnmount(() => {
-  if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
-  }
+  unsubscribe.forEach((uns) => uns());
+  unsubscribe.length = 0;
 });
+
+const orders = ref([]);
+
+function cancelOrder(order) {
+  if (user.value) {
+    deleteDoc(doc(firestore, String(user.value.uid), String(order.timestamp)));
+  }
+}
 </script>
 
 <template>
@@ -209,6 +213,41 @@ onBeforeUnmount(() => {
 
     <p v-if="user">{{ user.displayName }}</p>
 
+    <DataTable :value="orders" showGridlines tableStyle="min-width: 30rem">
+      <template #header>
+        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+          <span class="text-xl text-900 font-bold">Orders</span>
+          <!-- <Button icon="pi pi-times" severity="danger" label="Clear cart" @click="clearCart" /> -->
+        </div>
+      </template>
+      <Column field="timestamp" header="Date">
+        <template #body="slotProps">{{
+          new Date(slotProps.data.timestamp).toLocaleString('ru-RU')
+        }}</template>
+      </Column>
+      <Column field="items" header="Items">
+        <template #body="slotProps">{{ slotProps.data.items.length }}</template>
+      </Column>
+      <Column field="sum" header="Sum">
+        <template #body="slotProps">${{ slotProps.data.sum }}</template>
+      </Column>
+      <Column>
+        <template #body="slotProps">
+          <Button
+            type="button"
+            icon="pi pi-times"
+            text
+            outlined
+            severity="danger"
+            label="Cancel"
+            @click="() => cancelOrder(slotProps.data)"
+          />
+        </template>
+      </Column>
+    </DataTable>
+
+    <Divider />
+
     <DataTable :value="cart" showGridlines tableStyle="min-width: 30rem">
       <template #header>
         <div class="flex flex-wrap align-items-center justify-content-between gap-2">
@@ -225,9 +264,9 @@ onBeforeUnmount(() => {
             type="button"
             icon="pi pi-times"
             text
-            rounded
             outlined
             severity="danger"
+            label="Remove"
             @click="() => removeFromCart(slotProps.data)"
           />
         </template>
