@@ -82,14 +82,15 @@ const getSeverity = (product) => {
           <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
         </div>
       </div>
-      <div class="flex flex-column md:align-items-end gap-5">
+
+      <div class="flex flex-column gap-2">
         <span class="text-xl font-semibold text-900">{{ product.price }} руб.</span>
-        <div class="flex flex-row-reverse md:flex-row gap-2">
+        <div class="flex flex-row gap-2">
           <Button
             icon="pi pi-shopping-cart"
             label="Buy Now"
             :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
-            class="flex-auto md:flex-initial white-space-nowrap"
+            class="flex-auto white-space-nowrap"
           ></Button>
         </div>
       </div>
