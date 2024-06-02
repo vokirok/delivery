@@ -39,19 +39,18 @@ function handleSignOut() {
     <header class="flex align-items-center justify-content-between relative">
       <router-link class="flex align-items-center no-underline" to="/">
         <img src="/local_mall.svg" alt="Delivery Logo" height="42" />
-        <span class="text-900 font-medium text-2xl line-height-3 mr-8">Delivery</span>
+        <span class="font-medium text-2xl line-height-3 mr-8 logo-style">Delivery</span>
       </router-link>
 
       <section v-if="user" class="flex justify-content-between align-items-center gap-2 py-3">
         <span class="hidden md:block">{{ user.displayName }}</span>
 
         <router-link to="/user/cart">
-          <Button label="Cart" badge="2" icon="pi pi-shopping-cart"></Button>
+          <Button label="Cart" badge="2" severity="secondary "icon="pi pi-shopping-cart"></Button>
         </router-link>
 
         <Button
           label="Sign Out"
-          severity="danger"
           icon="pi pi-sign-out"
           @click="handleSignOut"
         ></Button>
@@ -68,7 +67,7 @@ function handleSignOut() {
     </header>
   </main>
 
-  <div class="border border-1 m-2 p-2">
+  <div class="m-2 p-2">
     <router-view></router-view>
   </div>
 </template>

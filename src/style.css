@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  font-family: "Montserrat", sans-serif;
+  --text-color: #364701;
+  --text-color-secondary: #909090;
+  
+  --primary-color: #ABB97C;
+  --primary-color-text: #F9F7F8;
+ 
+  --surface-ground: #F9F7F8;
+  --surface-50: #FFFFFF;
+  --surface-100: #EFEFEF;
+  --surface-200: #BDBDBD;
+  --surface-800: #364701;
+  --surface-border: #EFEFEF;
+} 
+
 * {
   box-sizing: border-box;
 }
@@ -5,4 +23,135 @@
 body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: var(--surface-50);
+}
+
+header{
+  background-color: var(--primary-color);
+  color: var(--text-color); 
+  padding: 0 8px;  
+}
+
+h1 {
+  color: var(--text-color);  
+  font-size: 32px; 
+}
+
+h2 {
+  background-color: var(--surface-200);
+  padding: 10px 10px;
+  color: var(--primary-color-text);
+  font-size: 24px;
+}
+
+h3{
+  color: var(--primary-color);
+  font-size: 19px;
+}
+
+/* ------------------------------------------------- */
+/* свои стили */
+/* ------------------------------------------------- */
+
+/* цвет надписи у логотипа, используется в AppLayout.vue */
+.logo-style {
+  color: var(--text-color);
+}
+
+/* ------------------------------------------------- */
+/* переопределение классов из темы */
+/* ------------------------------------------------- */
+
+/* тёмная кнопка со светлой надписью */
+.p-button {
+  color: var(--primary-color-text);
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+} 
+
+/* светлая кнопка с тёмной надписью */
+.p-button-secondary {
+  color: var(--text-color);
+  background: var(--surface-ground);
+  border: 1px solid var(--surface-ground);
+}
+
+/* число на кнопке с корзиной */
+.p-button .p-badge {
+  color: var(--primary-color-text);
+  background-color: var(--surface-800);
+}
+
+/* высплывающее сообщение при входе в учётную запись */
+.p-toast .p-toast-message.p-toast-message-success {
+  background: rgba(249, 247, 248, 0.95);
+  border: solid rgba(249, 247, 248, 0.95);
+  border-width: 1px;
+  color: var(--text-color);
+} 
+.p-toast .p-toast-message.p-toast-message-success .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-success .p-toast-icon-close {
+  color: var(--text-color);
+}
+.p-toast .p-toast-message.p-toast-message-success .p-toast-icon-close:hover {
+  background: var(--primary-color);
+}
+.p-toast .p-toast-message.p-toast-message-success .p-toast-icon-close {
+  outline-color: var(--primary-color);
+}
+
+/* высплывающее сообщение при выходе из учётной записи */
+.p-toast .p-toast-message.p-toast-message-contrast {
+  background: var(--surface-800);
+  border: solid var(--surface-800);
+  border-width: 1px;
+  color: var(--primary-color-text);
+}
+.p-toast .p-toast-message.p-toast-message-contrast .p-toast-message-icon,
+.p-toast .p-toast-message.p-toast-message-contrast .p-toast-icon-close {
+  color: var(--primary-color-text);
+}
+.p-toast .p-toast-message.p-toast-message-contrast .p-toast-icon-close {
+  outline-color: var(--surface-900);
+}
+.p-toast .p-toast-message.p-toast-message-contrast .p-toast-icon-close:hover {
+  background: var(--surface-900);
+}
+
+/* наклейка "мало" */
+.p-tag.p-tag-warning {
+  background-color: #DC7171;
+  color: var(--primary-color-text);
+}
+
+/* пагинатор */
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+  color: var(--text-color-secondary);
+}
+.p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover {
+  background: var(--surface-100);
+  color: var(--text-color-secondary);
+}
+.p-paginator .p-paginator-current {
+  color: var(--text-color-secondary);
+}
+.p-paginator .p-paginator-pages .p-paginator-page {
+  color: var(--text-color-secondary);
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: rgba(171, 185, 124, 0.3);
+  border-color: rgba(171, 185, 124, 0.3);
+  color: var(--text-color);
+}
+.p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
+  background: var(--surface-100);
+  color: var(--text-color-secondary);
 }
