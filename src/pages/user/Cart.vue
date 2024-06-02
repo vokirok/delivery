@@ -37,6 +37,7 @@ async function makeOrder2() {
             severity="danger"
             label="Очистить корзину"
             @click="clearCart"
+            size="small"
           />
         </div>
       </template>
@@ -54,6 +55,7 @@ async function makeOrder2() {
             outlined
             severity="danger"
             label="Убрать"
+            size="small"
             @click="() => removeFromCart(slotProps.data)"
           />
         </template>
@@ -64,7 +66,7 @@ async function makeOrder2() {
           <Button
             icon="pi pi-check-square"
             severity="success"
-            label="Оформить"
+            label="Оформить заказ"
             @click="makeOrder2"
           />
         </div>
