@@ -59,7 +59,7 @@ function askCancelOrder() {
 }
 
 function getOrderSummary() {
-  return `Всего ${numProductsInRussian(order.value.items.length)} продуктов на сумму ${order.value.sum} руб.`;
+  return `Всего ${numProductsInRussian(order.value.items.length)} на сумму ${order.value.sum} руб.`;
 }
 </script>
 

@@ -13,6 +13,8 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
+import { useCart } from '@/composables/cart';
+
 const firestore = useFirestore();
 
 const user = useCurrentUser();
@@ -86,39 +88,7 @@ async function uploadJsonToFirebase() {
 
 // const productToDisplay = ref({ id: 52, name: 'The product' });
 
-const cart = ref([]);
-
-function inCart(product) {
-  return cart.value.some(({ id }) => product.id === id);
-}
-
-function updateCart() {
-  if (user.value) {
-    collection(firestore, 'products');
-
-    setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
-  }
-}
-
-function addToCart(product) {
-  cart.value.push(product);
-  updateCart();
-}
-
-function removeFromCart(product) {
-  cart.value = cart.value.filter(({ id }) => product.id !== id);
-  updateCart();
-}
-
-function clearCart() {
-  cart.value.length = 0;
-  updateCart();
-}
-
-const cartSumm = computed(() => {
-  const sum = cart.value.reduce((sum, { price }) => sum + price, 0);
-  return Math.round((sum + Number.EPSILON) * 100) / 100;
-});
+const { cart, cartSumm, inCart, addToCart, removeFromCart, clearCart } = useCart();
 
 async function checkout() {
   if (user.value) {
@@ -139,23 +109,6 @@ const unsubscribe = [];
 
 watchEffect(() => {
   if (user.value) {
-    getDoc(doc(firestore, 'cart', String(user.value.uid))).then((doc) => {
-      if (doc) {
-        const data = doc.data();
-        if (data && data.cart) {
-          cart.value = Array.from(data.cart);
-        }
-      }
-    });
-
-    const unsCart = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
-      const data = doc.data();
-      if (data && data.cart) {
-        cart.value = Array.from(data.cart);
-      }
-    });
-    unsubscribe.push(unsCart);
-
     const unsOrders = onSnapshot(collection(firestore, String(user.value.uid)), (col) => {
       orders.value.length = 0;
       col.forEach((doc) => {
@@ -310,7 +263,6 @@ function cancelOrder(order) {
                 class="flex-auto white-space-nowrap"
                 severity="success"
                 @click="checkout"
-                cla
               />
               <Button
                 icon="pi pi-times"
