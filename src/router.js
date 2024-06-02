@@ -51,6 +51,10 @@ const router = createRouter({
           path: 'cart',
           component: () => import('./pages/user/Cart.vue'),
         },
+        {
+          path: 'order/:orderId(\\d+)',
+          component: () => import('./pages/user/Order.vue'),
+        },
       ],
     },
 

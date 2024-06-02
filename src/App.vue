@@ -6,6 +6,7 @@ const { testMode } = useTestMode();
 
 <template>
   <Toast />
+  <ConfirmDialog></ConfirmDialog>
   <router-view></router-view>
   <footer class="h-4rem"></footer>
   <div class="fixed" style="z-index: 50000; bottom: 26px; left: 4px">
