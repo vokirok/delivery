@@ -60,27 +60,26 @@ const getSeverity = (product) => {
         style="left: 4px; top: 4px"
       ></Tag>
     </div>
-    <div
-      class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4 border-1 w-auto"
-    >
-      <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+    <div class="relative flex flex-column justify-content-between flex-1 gap-4 border-1 w-auto">
+      <div class="absolute surface-100 p-1" style="border-radius: 30px; right: 4px; top: 8px">
+        <div
+          class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
+          style="
+            border-radius: 30px;
+            box-shadow:
+              0px 1px 2px 0px rgba(0, 0, 0, 0.04),
+              0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+          "
+        >
+          <span class="text-900 font-medium text-sm">{{ product.rating }}</span>
+          <i class="pi pi-star-fill text-yellow-500"></i>
+        </div>
+      </div>
+
+      <div class="flex flex-row md:flex-column justify-content-between align-items-start">
         <div>
           <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
           <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
-        </div>
-        <div class="surface-100 p-1" style="border-radius: 30px">
-          <div
-            class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
-            style="
-              border-radius: 30px;
-              box-shadow:
-                0px 1px 2px 0px rgba(0, 0, 0, 0.04),
-                0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-            "
-          >
-            <span class="text-900 font-medium text-sm">{{ product.rating }}</span>
-            <i class="pi pi-star-fill text-yellow-500"></i>
-          </div>
         </div>
       </div>
       <div class="flex flex-column md:align-items-end gap-5">
