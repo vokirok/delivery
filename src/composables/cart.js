@@ -23,14 +23,6 @@ export function useCart() {
   watchEffect(() => {
     if (user.value) {
       console.log('CART: watchEffect');
-      // getDoc(doc(firestore, 'cart', String(user.value.uid))).then((doc) => {
-      //   if (doc) {
-      //     const data = doc.data();
-      //     if (data && data.cart) {
-      //       cart.value = Array.from(data.cart);
-      //     }
-      //   }
-      // });
 
       unsubscribe = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
         const data = doc.data();
@@ -81,7 +73,24 @@ export function useCart() {
     updateCart();
   }
 
-  function checkout() {}
+  async function makeOrder(afterComplete) {
+    if (user.value) {
+      const timestamp = Date.now();
+      const order = {
+        items: Array.from(cart.value),
+        timestamp,
+        sum: cartSumm.value,
+        user: { id: user.value.uid, email: user.value.email, name: user.value.displayName },
+      };
+      // setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
+      const newOrderRef = doc(collection(firestore, String(user.value.uid)), String(timestamp));
+      await setDoc(newOrderRef, order);
+      clearCart();
+      if (afterComplete) {
+        afterComplete(timestamp);
+      }
+    }
+  }
 
-  return { cart, cartSumm, inCart, addToCart, removeFromCart, clearCart };
+  return { cart, cartSumm, inCart, addToCart, removeFromCart, clearCart, makeOrder };
 }

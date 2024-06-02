@@ -109,23 +109,6 @@ const unsubscribe = [];
 
 watchEffect(() => {
   if (user.value) {
-    // getDoc(doc(firestore, 'cart', String(user.value.uid))).then((doc) => {
-    //   if (doc) {
-    //     const data = doc.data();
-    //     if (data && data.cart) {
-    //       cart.value = Array.from(data.cart);
-    //     }
-    //   }
-    // });
-
-    // const unsCart = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
-    //   const data = doc.data();
-    //   if (data && data.cart) {
-    //     cart.value = Array.from(data.cart);
-    //   }
-    // });
-    // unsubscribe.push(unsCart);
-
     const unsOrders = onSnapshot(collection(firestore, String(user.value.uid)), (col) => {
       orders.value.length = 0;
       col.forEach((doc) => {
