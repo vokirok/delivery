@@ -173,3 +173,11 @@ h3{
   background: var(--surface-100);
   color: var(--text-color-secondary);
 }
+
+/* цвет звёздочек рейтинга товара в заказах */
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+  color: var(--primary-color);
+}
+.p-rating .p-rating-item .p-rating-icon {
+  color: var(--primary-color);
+}
