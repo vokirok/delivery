@@ -48,7 +48,10 @@ function handleSignOut() {
       </router-link>
 
       <section v-if="user" class="flex justify-content-between align-items-center gap-2 py-3">
-        <span class="hidden md:block">{{ user.displayName }}</span>
+        <router-link to="/user">
+          <!-- <span class="hidden md:block">{{ user.displayName }}</span> -->
+          <Button :label="user.displayName"></Button>
+        </router-link>
 
         <router-link to="/user/cart">
           <Button

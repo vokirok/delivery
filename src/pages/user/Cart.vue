@@ -1,6 +1,11 @@
 <script setup>
 import { useCart } from '@/composables/cart';
 import { numProductsInRussian } from '@/utils';
+import { useRouter } from 'vue-router';
+import { useToast } from 'primevue/usetoast';
+
+const router = useRouter();
+const toast = useToast();
 
 const { cart, cartSumm, removeFromCart, clearCart, makeOrder } = useCart();
 
@@ -9,8 +14,14 @@ function getCartSummary() {
 }
 
 async function makeOrder2() {
-  makeOrder((orderNum) => {
-    console.log(`Order #${orderNum} completed`);
+  makeOrder((orderNum, sum) => {
+    router.push('/');
+    toast.add({
+      severity: 'success',
+      summary: `Заказ ${orderNum} на сумму ${sum} руб. успешно оформлен`,
+      detail: 'Спасибо за заказ!',
+      life: 3000,
+    });
   });
 }
 </script>
@@ -21,12 +32,17 @@ async function makeOrder2() {
       <template #header>
         <div class="flex flex-wrap align-items-center justify-content-between gap-2">
           <span class="text-xl text-900 font-bold">Корзина</span>
-          <Button icon="pi pi-times" severity="danger" label="Clear cart" @click="clearCart" />
+          <Button
+            icon="pi pi-times"
+            severity="danger"
+            label="Очистить корзину"
+            @click="clearCart"
+          />
         </div>
       </template>
-      <Column field="id" header="Id"></Column>
-      <Column field="name" header="Name"></Column>
-      <Column field="price" header="Price"></Column>
+      <Column field="id" header="№"></Column>
+      <Column field="name" header="Товар"></Column>
+      <Column field="price" header="Цена"></Column>
       <Column>
         <template #body="slotProps">
           <Button
@@ -35,7 +51,7 @@ async function makeOrder2() {
             text
             outlined
             severity="danger"
-            label="Remove"
+            label="Убрать"
             @click="() => removeFromCart(slotProps.data)"
           />
         </template>
