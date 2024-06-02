@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="surface-ground flex align-items-center justify-content-center min-w-screen overflow-hidden"
+    class="surface-ground flex align-items-center justify-content-center min-h-screen overflow-hidden"
   >
     <div class="flex flex-column align-items-center justify-content-center">
       <router-link to="/">
@@ -12,11 +12,7 @@
         style="
           border-radius: 56px;
           padding: 0.3rem;
-          background: linear-gradient(
-            180deg,
-            rgba(33, 150, 243, 0.4) 10%,
-            rgba(33, 150, 243, 0) 30%
-          );
+          background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);
         "
       >
         <div
