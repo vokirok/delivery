@@ -22,7 +22,7 @@ export function useCart() {
 
   watchEffect(() => {
     if (user.value) {
-      console.log('CART: watchEffect');
+      // console.log('CART: watchEffect');
 
       unsubscribe = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
         const data = doc.data();
@@ -34,7 +34,7 @@ export function useCart() {
   });
 
   onBeforeUnmount(() => {
-    console.log('CART: onBeforeUnmount');
+    // console.log('CART: onBeforeUnmount');
     if (unsubscribe) {
       unsubscribe();
       unsubscribe = null;
