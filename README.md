@@ -1,5 +1,53 @@
 # Delivery
 
+## Development requirements:
+
+### Скачать и установить Visual Studio Code
+
+https://code.visualstudio.com/)
+
+### Скачать и установить Node.js
+
+https://nodejs.org/
+
+### Установить Firebase tools
+
+После установки Node.js выполнить команду в терминале:
+
+```sh
+npm install -g firebase-tools
+```
+
+Возможно потребуются права администратора.
+
+### Установить используемые в проекте пакеты
+
+После установки Node.js выполнить команду в терминале внутри папки проекта:
+
+```sh
+npm install
+```
+
+### Разрабатывать
+
+1. Открыть Visual Studio Code.
+
+2. Открыть папку с проектом.
+
+3. Запустить Firerbase Emulator:
+
+```sh
+firebase emulators:start
+```
+
+4. Запустить локальный отладочный сервер:
+
+```sh
+npm run dev
+```
+
+---
+
 ## Soft + Packages
 
 ### Visual Studio Code
@@ -84,7 +132,7 @@ npm i vuefire firebase
 
 Сначала нужно войти в консоль [Google Firebase](https://firebase.google.com/) создать там проект (`Add Project`), настроить модули `Authentication` и `Firestore Database`.
 
-Потом в `Project settings` создать `Web app` и скопировать оттуда настройки `firebaseConfig`. Свои я положил в файле `main.js`:
+Потом в `Project settings` создать `Web app` и скопировать оттуда настройки `firebaseConfig`, положить, например в `main.js`:
 
 ```js
 const firebaseConfig = {
@@ -119,13 +167,14 @@ npm install -g firebase-tools
 firebase init
 ```
 
-Я выбрал только:
+Для этого проекта выбрать только:
 
 - auth
 - firestore
-  Больше нам ничего не нужно.
 
-Мои настройки лежат в файлах:
+Больше тут ничего не нужно.
+
+Сгенерированные для проекта настройки лежат в файлах:
 
 - `.firebaserc` — тут только название проекта;
 - `firebase.json` — тут настройки эмулятора: порты и ссылки на правила;
@@ -158,7 +207,7 @@ firebase emulators:start
 
 Если потом в браузере открыть http://127.0.0.1:4000/auth, то можно попасть в _локальную_ консоль Google Firebase.
 
-В файле `main.js` я поставил следующие строчки, чтобы в дебаге использовалась локальная Google Firebase:
+В файле `main.js` есть следующие строчки, чтобы в дебаге использовалась локальная Google Firebase:
 
 ```js
 if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
