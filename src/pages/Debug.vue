@@ -1,7 +1,16 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watchEffect } from 'vue';
 import { useCurrentUser, useFirestore, useCollection, useDocument } from 'vuefire';
-import { collection, doc, getDoc, setDoc, onSnapshot, where, query } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  onSnapshot,
+  where,
+  query,
+  serverTimestamp,
+} from 'firebase/firestore';
 
 const firestore = useFirestore();
 
@@ -96,7 +105,6 @@ function addToCart(product) {
 }
 
 function removeFromCart(product) {
-  // cart.value.delete(product);
   cart.value = cart.value.filter(({ id }) => product.id !== id);
   updateCart();
 }
@@ -107,19 +115,22 @@ function clearCart() {
 }
 
 const cartSumm = computed(() => {
-  return cart.value.reduce((sum, { price }) => sum + price, 0);
+  const sum = cart.value.reduce((sum, { price }) => sum + price, 0);
+  return Math.round((sum + Number.EPSILON) * 100) / 100;
 });
 
-// const cartInFirebase = useCollection(collection(firestore, 'cart', user.value.uid));
-
-function checkout() {
+async function checkout() {
   if (user.value) {
     console.log(user.value.uid);
-    console.log(checkout);
+    // console.log(checkout);
+    const order = { items: Array.from(cart.value), timestamp: Date.now(), sum: cartSumm.value };
+    // setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
+    const newOrderRef = doc(collection(firestore, String(user.value.uid)));
+    await setDoc(newOrderRef, order);
   }
 }
 
-// let unsubscribe = null;
+let unsubscribe = null;
 
 watchEffect(() => {
   if (user.value) {
@@ -140,6 +151,13 @@ watchEffect(() => {
       }
     });
 
+    unsubscribe = onSnapshot(doc(firestore, 'cart', String(user.value.uid)), (doc) => {
+      const data = doc.data();
+      if (data && data.cart) {
+        cart.value = Array.from(data.cart);
+      }
+    });
+
     // const q = query(collection(firestore, 'cart'), where('uid', '==', user.value.uid));
 
     // unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -154,9 +172,10 @@ watchEffect(() => {
 });
 
 onBeforeUnmount(() => {
-  // if (unsubscribe) {
-  //   unsubscribe();
-  // }
+  if (unsubscribe) {
+    unsubscribe();
+    unsubscribe = null;
+  }
 });
 </script>
 
@@ -225,13 +244,9 @@ onBeforeUnmount(() => {
 
     <!-- <ProductImage :product="productToDisplay" width="250" preview /> -->
 
-    <DataTable
-      :value="products"
-      showGridlines
-      tableStyle="min-width: 30rem"
-      scrollable
-      scrollHeight="300px"
-    >
+    <!-- scrollable
+      scrollHeight="300px" -->
+    <DataTable :value="products" showGridlines tableStyle="min-width: 30rem">
       <Column field="id" header="Id"></Column>
       <Column header="Image">
         <template #body="slotProps">
@@ -265,7 +280,7 @@ onBeforeUnmount(() => {
               />
               <Button
                 icon="pi pi-times"
-                v-tooltip="`Remove from cart`"
+                v-tooltip.left="`Remove from cart`"
                 outlined
                 severity="danger"
                 @click="() => removeFromCart(slotProps.data)"
