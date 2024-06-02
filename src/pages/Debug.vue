@@ -233,16 +233,11 @@ function cancelOrder(order) {
       </Column>
       <Column>
         <template #body="slotProps">
-          <Button
-            type="button"
-            icon="pi pi-times"
-            text
-            outlined
-            severity="danger"
-            label="Cancel"
-            @click="() => cancelOrder(slotProps.data)"
-          />
+          <router-link :to="`/user/order/${slotProps.data.timestamp}`">
+            <Button type="button" text outlined label="View" />
+          </router-link>
         </template>
+        <!-- @click="() => viewOrder(slotProps.data)" -->
       </Column>
     </DataTable>
 
