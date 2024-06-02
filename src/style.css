@@ -12,8 +12,11 @@
   --surface-50: #FFFFFF;
   --surface-100: #EFEFEF;
   --surface-200: #BDBDBD;
+  --surface-300: #909090;
   --surface-800: #364701;
   --surface-border: #EFEFEF;
+
+  --danger-color: #DC7171;
 } 
 
 * {
@@ -37,6 +40,7 @@ header{
 h1 {
   color: var(--text-color);  
   font-size: 32px; 
+  margin: 10px 10px;
 }
 
 h2 {
@@ -71,7 +75,7 @@ h3{
   border: 1px solid var(--primary-color);
 } 
 
-/* светлая кнопка с тёмной надписью */
+/* светлая кнопка с тёмной надписью для корзины */
 .p-button-secondary {
   color: var(--text-color);
   background: var(--surface-ground);
@@ -84,7 +88,21 @@ h3{
   background-color: var(--surface-800);
 }
 
-/* высплывающее сообщение при входе в учётную запись */
+/* кнопка чекаут */
+.p-button-success {
+  color: var(--primary-color-text);
+  background:  var(--surface-300);
+  border: 1px solid var(--surface-300);
+}
+
+/* кнопка удаления товара из корзины */
+.p-button-danger {
+  color: var(--primary-color-text);
+  background:  var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+/* всплывающее сообщение при входе в учётную запись */
 .p-toast .p-toast-message.p-toast-message-success {
   background: rgba(249, 247, 248, 0.95);
   border: solid rgba(249, 247, 248, 0.95);
@@ -102,7 +120,7 @@ h3{
   outline-color: var(--primary-color);
 }
 
-/* высплывающее сообщение при выходе из учётной записи */
+/* всплывающее сообщение при выходе из учётной записи */
 .p-toast .p-toast-message.p-toast-message-contrast {
   background: var(--surface-800);
   border: solid var(--surface-800);
@@ -122,7 +140,7 @@ h3{
 
 /* наклейка "мало" */
 .p-tag.p-tag-warning {
-  background-color: #DC7171;
+  background-color: var(--danger-color);
   color: var(--primary-color-text);
 }
 
