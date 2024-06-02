@@ -57,11 +57,11 @@ function handleSignOut() {
         ></Button>
       </section>
       <section v-else class="flex justify-content-between align-items-center gap-2 py-3">
-        <router-link to="/user/signin">
+        <router-link to="/signin">
           <Button label="Sign In" icon="pi pi-sign-in"></Button>
         </router-link>
 
-        <router-link to="/user/signup">
+        <router-link to="/signup">
           <Button label="Sign Up" icon="pi pi-user-plus"></Button>
         </router-link>
       </section>

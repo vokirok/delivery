@@ -30,20 +30,22 @@ const router = createRouter({
     },
 
     {
+      path: '/signin',
+      component: () => import('./pages/user/SignIn.vue'),
+    },
+
+    {
+      path: '/signup',
+      component: () => import('./pages/user/SignUp.vue'),
+    },
+
+    {
       path: '/user',
-      component: EmptyLayout,
+      component: AppLayout,
       children: [
         {
           path: '',
           component: () => import('./pages/user/Account.vue'),
-        },
-        {
-          path: 'signin',
-          component: () => import('./pages/user/SignIn.vue'),
-        },
-        {
-          path: 'signup',
-          component: () => import('./pages/user/SignUp.vue'),
         },
         {
           path: 'cart',
