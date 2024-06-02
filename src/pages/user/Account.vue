@@ -1,7 +1,7 @@
-<script setup></script>
+<script setup>
+import Orders from './Orders.vue';
+</script>
 
 <template>
-  <article>
-    <h2>Account</h2>
-  </article>
+  <Orders />
 </template>
