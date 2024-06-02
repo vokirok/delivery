@@ -45,26 +45,21 @@ function onSubmit() {
       router.push('/');
       toast.add({
         severity: 'success',
-        summary: 'Successfully signed in',
-        detail: `Welcome, ${userCredential.user.displayName}!`,
+        summary: 'Вход выполнен успешно',
+        detail: `Добро пожаловать, ${userCredential.user.displayName}!`,
         life: 3000,
       });
     })
     .catch((error) => {
-      console.error('Failed to sign in');
-      console.error(error);
-      console.log(error.code);
-      console.log(error.message);
-
       switch (error.code) {
         case 'auth/invalid-email':
-          errorMessage.value = 'Invalid email';
+          errorMessage.value = 'Неверный почтовый адрес';
           break;
         case 'auth/user-not-found':
-          errorMessage.value = 'User not found';
+          errorMessage.value = 'Пользователь не найден';
           break;
         case 'auth/wrong-password':
-          errorMessage.value = 'Wrong password';
+          errorMessage.value = 'Неверный пароль';
           break;
         default:
           errorMessage.value = error.code;
@@ -93,15 +88,15 @@ function onSubmit() {
       >
         <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
           <div class="text-center mb-5">
-            <div class="text-900 text-3xl font-medium mb-3">Welcome to Delivery!</div>
-            <span class="text-600 font-medium">Sign in to continue</span>
+            <div class="text-900 text-3xl font-medium mb-3">Добро пожаловать!</div>
+            <span class="text-600 font-medium">Войдите, чтобы продолжить</span>
           </div>
 
           <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
 
           <div>
             <label for="email1" class="block text-900 text-xl font-medium mb-2"
-              >Email<Button
+              >Почта<Button
                 v-if="testMode"
                 class="text-xs p-1 ml-2"
                 icon="pi pi-users"
@@ -117,27 +112,26 @@ function onSubmit() {
             <InputText
               id="email1"
               type="text"
-              placeholder="Email address"
               class="w-full md:w-30rem mb-5"
               style="padding: 1rem"
               v-model="email"
             />
 
-            <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+            <label for="password1" class="block text-900 font-medium text-xl mb-2">Пароль</label>
             <Password
               id="password1"
               v-model="password"
-              placeholder="Password"
               :toggleMask="true"
               class="w-full mb-3"
               inputClass="w-full"
               :inputStyle="{ padding: '1rem' }"
+              :feedback="false"
             ></Password>
 
             <Message severity="error" v-if="errorMessage">{{ errorMessage }}</Message>
 
             <Button
-              label="Sign In"
+              label="Войти"
               class="w-full p-3 my-5 text-xl"
               type="submit"
               :disabled="!(email && password)"

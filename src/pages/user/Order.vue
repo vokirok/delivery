@@ -15,6 +15,7 @@ const firestore = useFirestore();
 const user = useCurrentUser();
 const router = useRouter();
 const route = useRoute();
+
 const order = ref(null);
 
 watchEffect(() => {
@@ -71,17 +72,16 @@ function getOrderSummary() {
           <span class="text-xl text-900 font-bold"
             >Заказ #{{ order.timestamp }} от {{ new Date(order.timestamp).toLocaleString('ru-RU') }}
           </span>
-          <!-- <Button icon="pi pi-times" severity="danger" label="Clear cart" @click="clearCart" /> -->
         </div>
       </template>
 
-      <Column field="id" header="Id"></Column>
-      <Column header="Image">
+      <Column field="id" header="№"></Column>
+      <Column header="Фото">
         <template #body="slotProps">
           <ProductImage :product="slotProps.data" imageClass="w-6rem border-round" preview />
         </template>
       </Column>
-      <Column field="name" header="Name">
+      <Column field="name" header="Название">
         <template #body="slotProps">
           <div>
             <span class="font-medium text-secondary text-sm">{{ slotProps.data.category }}</span>
@@ -92,7 +92,7 @@ function getOrderSummary() {
           </div>
         </template>
       </Column>
-      <Column field="price" header="Price">
+      <Column field="price" header="Цена">
         <template #body="slotProps">
           <div class="flex flex-column md:align-items-start gap-5">
             <span class="text-xl font-semibold text-900">{{ slotProps.data.price }} руб.</span>
@@ -101,7 +101,6 @@ function getOrderSummary() {
       </Column>
       <template #footer>
         <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-          <!-- Всего {{ order.items.length }} продуктов на сумму {{ order.sum }} руб. -->
           {{ getOrderSummary() }}
           <Button
             icon="pi pi-times"

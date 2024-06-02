@@ -1,16 +1,6 @@
-import { ref, computed, onMounted, onBeforeUnmount, watchEffect } from 'vue';
-import { useCurrentUser, useFirestore, useCollection, useDocument } from 'vuefire';
-import {
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  deleteDoc,
-  onSnapshot,
-  where,
-  query,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { ref, computed, onBeforeUnmount, watchEffect } from 'vue';
+import { useCurrentUser, useFirestore } from 'vuefire';
+import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
 
 export function useCart() {
   const firestore = useFirestore();
@@ -43,7 +33,7 @@ export function useCart() {
 
   function updateCart() {
     if (user.value) {
-      collection(firestore, 'products');
+      // collection(firestore, 'products');
 
       setDoc(doc(firestore, 'cart', String(user.value.uid)), { cart: Array.from(cart.value) });
     }

@@ -50,21 +50,19 @@ function onSubmit() {
         router.push('/');
         toast.add({
           severity: 'success',
-          summary: 'Successfully signed up',
-          detail: `Welcome, ${name.value}!`,
+          summary: 'Вы успешно зарегистрировались',
+          detail: `Добро пожаловать, ${name.value}!`,
           life: 3000,
         });
       })
     )
     .catch((error) => {
-      console.error('Failed to create user');
-      console.error(error);
       switch (error.code) {
         case 'auth/invalid-email':
-          errorMessage.value = 'Invalid email';
+          errorMessage.value = 'Неверный почтовый адрес';
           break;
         case 'auth/email-already-in-use':
-          errorMessage.value = 'Email already in use';
+          errorMessage.value = 'Почтовый адрес уже используется';
           break;
         default:
           errorMessage.value = error.code;
@@ -93,15 +91,15 @@ function onSubmit() {
       >
         <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
           <div class="text-center mb-5">
-            <div class="text-900 text-3xl font-medium mb-3">Welcome to Delivery!</div>
-            <span class="text-600 font-medium">Sign up to continue</span>
+            <div class="text-900 text-3xl font-medium mb-3">Добро пожаловать!</div>
+            <span class="text-600 font-medium">Зарегистрируйтесь, чтобы продолжить</span>
           </div>
 
           <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
 
           <div>
             <label for="name1" class="block text-900 text-xl font-medium mb-2"
-              >Name<Button
+              >Имя<Button
                 v-if="testMode"
                 class="text-xs p-1 ml-2"
                 icon="pi pi-users"
@@ -117,38 +115,36 @@ function onSubmit() {
             <InputText
               id="name1"
               type="text"
-              placeholder="Email address"
               class="w-full md:w-30rem mb-5"
               style="padding: 1rem"
               v-model="name"
             />
 
-            <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+            <label for="email1" class="block text-900 text-xl font-medium mb-2">Почта</label>
 
             <InputText
               id="email1"
               type="text"
-              placeholder="Email address"
               class="w-full md:w-30rem mb-5"
               style="padding: 1rem"
               v-model="email"
             />
 
-            <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+            <label for="password1" class="block text-900 font-medium text-xl mb-2">Пароль</label>
             <Password
               id="password1"
               v-model="password"
-              placeholder="Password"
               :toggleMask="true"
               class="w-full mb-3"
               inputClass="w-full"
               :inputStyle="{ padding: '1rem' }"
+              :feedback="false"
             ></Password>
 
             <Message severity="error" v-if="errorMessage">{{ errorMessage }}</Message>
 
             <Button
-              label="Sign Up"
+              label="Зарегистроваться"
               class="w-full p-3 my-5 text-xl"
               type="submit"
               :disabled="!(name && email && password)"

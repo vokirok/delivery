@@ -9,26 +9,19 @@ const products = useCollection(collection(firestore, 'products'));
 
 const { user, inCart, addToCart, removeFromCart } = useCart();
 
-const getSeverity = (product) => {
-  switch (product.inventoryStatus) {
-    case 'INSTOCK':
-      return 'success';
-
+function getStockTitle(n) {
+  switch (n) {
     case 'LOWSTOCK':
-      return 'warning';
-
-    case 'OUTOFSTOCK':
-      return 'danger';
-
+      return 'МАЛО';
     default:
       return null;
   }
-};
+}
 </script>
 
 <template>
   <section class="flex flex-column">
-    <h1>Home</h1>
+    <h1>Меню</h1>
     <DataView :value="products" layout="grid" :paginator="true" :rows="9">
       <template #grid="slotProps">
         <div class="grid grid-nogutter">
@@ -48,8 +41,8 @@ const getSeverity = (product) => {
                   />
                   <Tag
                     v-if="product.inventoryStatus === 'LOWSTOCK'"
-                    :value="product.inventoryStatus"
-                    :severity="getSeverity(product)"
+                    :value="getStockTitle(product.inventoryStatus)"
+                    severity="warning"
                     class="absolute"
                     style="left: 4px; top: 4px"
                   ></Tag>
@@ -90,8 +83,7 @@ const getSeverity = (product) => {
                     >
                       <Button
                         icon="pi pi-check-square"
-                        label="Checkout"
-                        :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+                        label="Оформить"
                         class="flex-auto white-space-nowrap"
                         severity="success"
                       />
@@ -99,7 +91,7 @@ const getSeverity = (product) => {
                     <!-- @click="checkout" -->
                     <Button
                       icon="pi pi-times"
-                      v-tooltip.left="`Remove from cart`"
+                      v-tooltip.left="'Убрать из корзины'"
                       outlined
                       severity="danger"
                       @click="() => removeFromCart(product)"
@@ -108,8 +100,7 @@ const getSeverity = (product) => {
                   <div v-else-if="user" class="flex flex-row gap-2">
                     <Button
                       icon="pi pi-cart-arrow-down"
-                      label="Add to cart"
-                      :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+                      label="В корзину"
                       class="flex-auto white-space-nowrap"
                       @click="() => addToCart(product)"
                     ></Button>
@@ -122,9 +113,8 @@ const getSeverity = (product) => {
                     >
                       <Button
                         icon="pi pi-cart-arrow-down"
-                        label="Add to cart"
+                        label="В корзину"
                         class="flex-auto white-space-nowrap"
-                        :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
                       ></Button>
                     </router-link>
                     <!-- <Button icon="pi pi-heart" outlined></Button> -->

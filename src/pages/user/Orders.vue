@@ -66,13 +66,6 @@ onBeforeUnmount(() => {
       <Column field="sum" header="Сумма заказа">
         <template #body="slotProps">{{ slotProps.data.sum }} руб.</template>
       </Column>
-      <!-- <Column>
-        <template #body="slotProps">
-          <router-link :to="`/user/order/${slotProps.data.timestamp}`">
-            <Button type="button" text outlined label="Детали заказа" />
-          </router-link>
-        </template>
-      </Column> -->
     </DataTable>
   </section>
   <section v-else>

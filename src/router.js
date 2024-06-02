@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import AppLayout from './layout/AppLayout.vue';
-import EmptyLayout from './layout/EmptyLayout.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),
