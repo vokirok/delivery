@@ -92,5 +92,5 @@ export function useCart() {
     }
   }
 
-  return { cart, cartSumm, inCart, addToCart, removeFromCart, clearCart, makeOrder };
+  return { user, cart, cartSumm, inCart, addToCart, removeFromCart, clearCart, makeOrder };
 }

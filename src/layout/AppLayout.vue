@@ -11,10 +11,11 @@ const user = useCurrentUser();
 
 const toast = useToast();
 
-const { cart } = useCart();
+const { cart, clearCart } = useCart();
 
 function handleSignOut() {
   const userName = user.value.displayName;
+  clearCart();
   signOut(auth)
     .then(() => {
       // Sign-out successful.

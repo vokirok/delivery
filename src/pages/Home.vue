@@ -7,7 +7,7 @@ import { useCart } from '@/composables/cart';
 const firestore = useFirestore();
 const products = useCollection(collection(firestore, 'products'));
 
-const { inCart, addToCart, removeFromCart } = useCart();
+const { user, inCart, addToCart, removeFromCart } = useCart();
 
 const getSeverity = (product) => {
   switch (product.inventoryStatus) {
@@ -84,7 +84,10 @@ const getSeverity = (product) => {
                   <span class="text-2xl font-semibold text-900">{{ product.price }} руб.</span>
 
                   <div v-if="inCart(product)" class="flex flex-row gap-2">
-                    <router-link to="/user/cart" class="no-underline">
+                    <router-link
+                      to="/user/cart"
+                      class="no-underline flex-auto white-space-nowrap flex flex-row"
+                    >
                       <Button
                         icon="pi pi-check-square"
                         label="Checkout"
@@ -102,7 +105,7 @@ const getSeverity = (product) => {
                       @click="() => removeFromCart(product)"
                     />
                   </div>
-                  <div v-else class="flex flex-row gap-2">
+                  <div v-else-if="user" class="flex flex-row gap-2">
                     <Button
                       icon="pi pi-cart-arrow-down"
                       label="Add to cart"
@@ -110,6 +113,20 @@ const getSeverity = (product) => {
                       class="flex-auto white-space-nowrap"
                       @click="() => addToCart(product)"
                     ></Button>
+                    <!-- <Button icon="pi pi-heart" outlined></Button> -->
+                  </div>
+                  <div v-else class="flex flex-row gap-2">
+                    <router-link
+                      to="/signin"
+                      class="flex-auto white-space-nowrap flex no-underline"
+                    >
+                      <Button
+                        icon="pi pi-cart-arrow-down"
+                        label="Add to cart"
+                        class="flex-auto white-space-nowrap"
+                        :disabled="product.inventoryStatus === 'OUTOFSTOCK'"
+                      ></Button>
+                    </router-link>
                     <!-- <Button icon="pi pi-heart" outlined></Button> -->
                   </div>
                 </div>
