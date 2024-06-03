@@ -322,4 +322,40 @@
         "category": "Пицца",
         "inventoryStatus": "INSTOCK",
         "rating": 5
+    },
+    {
+        "id": 37,
+        "name": "Торт медовый",
+        "description": "Состав: медовые коржи, сливочный крем, шоколадная посыпка",
+        "price": 250,
+        "category": "Десерты",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4.7
+    },
+    {
+        "id": 38,
+        "name": "Шоколадные капкейки",
+        "description": "Состав: вок, курица, шампиньоны, брокколи, красный перец, фасоль, кунжут",
+        "price": 350,
+        "category": "Десерты",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4.9
+    },
+    {
+        "id": 39,
+        "name": "Блинчики с клубникой",
+        "description": "Состав: блины, взбитые сливки, свежая клубника",
+        "price": 180,
+        "category": "Завтраки",
+        "inventoryStatus": "INSTOCK",
+        "rating": 5
+    },
+    {
+        "id": 40,
+        "name": "Капкейки",
+        "description": "Состав: тесто, крем-чиз, яркая посылка, вишня",
+        "price": 370,
+        "category": "Десерты",
+        "inventoryStatus": "INSTOCK",
+        "rating": 4.1
     }]
